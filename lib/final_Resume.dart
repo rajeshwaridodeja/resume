@@ -6,26 +6,24 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'db.dart';
 import 'list.dart';
 
-void main() => runApp(new MyApp());
+class Final_Resume extends StatefulWidget {
+  Final_Resume({Key? key, required this.myTitle}) : super(key: key);
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Testing',
-      home: Todo_Page(),
-    );
-  }
-}
-
-class Todo_Page extends StatefulWidget {
-  const Todo_Page({Key? key}) : super(key: key);
+  final List myTitle;
 
   @override
-  State<Todo_Page> createState() => _Todo_PageState();
+  State<Final_Resume> createState() => _Final_ResumeState();
 }
 
-class _Todo_PageState extends State<Todo_Page> {
+class _Final_ResumeState extends State<Final_Resume> {
+  List<String> tasks = [
+    "Name",
+    "Email",
+    "Mobile No.",
+    "Experience",
+    "Education",
+    "Project",
+  ];
   var dbhelper = Databasehelper.instance;
   List<Item> item = [];
 
@@ -43,51 +41,37 @@ class _Todo_PageState extends State<Todo_Page> {
   }
 
   Future<void> asynctask() async {
-    item = await dbhelper.getTask();
-    setState(() {});
-    print("item list is ${item[0].name}");
+    //item = await dbhelper.getTask();
+    //setState(() {});
+    //print("item list is ${item[0].name}");
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('My App'),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(
-              Icons.add,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => resume_page()),
-              ).then((value) {
-                if (value) {
-                  asynctask();
-                }
-              });
-            },
-          )
-        ],
-      ),
-      body: ListView(
+      body: Column(
         children: [
+          const Center(
+              child: Padding(
+            padding: EdgeInsets.only(top: 10),
+            child: Text(
+              " Final Resume",
+              style: TextStyle(
+                  color: Colors.teal,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.none),
+            ),
+          )),
           Padding(
             padding: const EdgeInsets.all(10),
             child: Container(
                 width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.blueGrey,
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                ),
                 child: ListView.builder(
                   shrinkWrap: true,
-                  itemCount: item.length,
-                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: widget.myTitle.length,
                   itemBuilder: (context, index) {
-                    print("list item is ${item[index].name}");
+                    print("list item is ${widget.myTitle[index]}");
                     return InkWell(
                       onTap: () {
                         Navigator.push(
@@ -99,7 +83,14 @@ class _Todo_PageState extends State<Todo_Page> {
                           asynctask();
                         });
                       },
-                      child: Container(
+                      child: Text(
+                        widget.myTitle[index],
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.none),
+                      ), /*Container(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,9 +103,9 @@ class _Todo_PageState extends State<Todo_Page> {
                                 Row(
                                   children: [
                                     Text(
-                                      "Name:",
+                                      widget.myTitle[index],
                                       style: TextStyle(
-                                          color: Colors.white,
+                                          color: Colors.black,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
                                           decoration: TextDecoration.none),
@@ -125,7 +116,7 @@ class _Todo_PageState extends State<Todo_Page> {
                                       child: Text(
                                         item[index].name.toString(),
                                         style: TextStyle(
-                                            color: Colors.white,
+                                            color: Colors.black,
                                             fontSize: 18,
                                             fontWeight: FontWeight.normal,
                                             decoration: TextDecoration.none),
@@ -138,7 +129,7 @@ class _Todo_PageState extends State<Todo_Page> {
                                     Text(
                                       "Email:",
                                       style: TextStyle(
-                                          color: Colors.white,
+                                          color: Colors.black,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
                                           decoration: TextDecoration.none),
@@ -149,7 +140,7 @@ class _Todo_PageState extends State<Todo_Page> {
                                       child: Text(
                                         item[index].email.toString(),
                                         style: TextStyle(
-                                            color: Colors.white,
+                                            color: Colors.black,
                                             fontSize: 18,
                                             fontWeight: FontWeight.normal,
                                             decoration: TextDecoration.none),
@@ -162,7 +153,7 @@ class _Todo_PageState extends State<Todo_Page> {
                                     Text(
                                       "Mobile No.:",
                                       style: TextStyle(
-                                          color: Colors.white,
+                                          color: Colors.black,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
                                           decoration: TextDecoration.none),
@@ -173,7 +164,7 @@ class _Todo_PageState extends State<Todo_Page> {
                                       child: Text(
                                         item[index].moblie.toString(),
                                         style: TextStyle(
-                                            color: Colors.white,
+                                            color: Colors.black,
                                             fontSize: 18,
                                             fontWeight: FontWeight.normal,
                                             decoration: TextDecoration.none),
@@ -186,7 +177,7 @@ class _Todo_PageState extends State<Todo_Page> {
                                     Text(
                                       "Experience:",
                                       style: TextStyle(
-                                          color: Colors.white,
+                                          color: Colors.black,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
                                           decoration: TextDecoration.none),
@@ -197,7 +188,7 @@ class _Todo_PageState extends State<Todo_Page> {
                                       child: Text(
                                         item[index].experience.toString(),
                                         style: TextStyle(
-                                            color: Colors.white,
+                                            color: Colors.black,
                                             fontSize: 18,
                                             fontWeight: FontWeight.normal,
                                             decoration: TextDecoration.none),
@@ -210,7 +201,7 @@ class _Todo_PageState extends State<Todo_Page> {
                                     Text(
                                       "Education:",
                                       style: TextStyle(
-                                          color: Colors.white,
+                                          color: Colors.black,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
                                           decoration: TextDecoration.none),
@@ -221,7 +212,7 @@ class _Todo_PageState extends State<Todo_Page> {
                                       child: Text(
                                         item[index].education.toString(),
                                         style: TextStyle(
-                                            color: Colors.white,
+                                            color: Colors.black,
                                             fontSize: 18,
                                             fontWeight: FontWeight.normal,
                                             decoration: TextDecoration.none),
@@ -234,7 +225,7 @@ class _Todo_PageState extends State<Todo_Page> {
                                     Text(
                                       "Project:",
                                       style: TextStyle(
-                                          color: Colors.white,
+                                          color: Colors.black,
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
                                           decoration: TextDecoration.none),
@@ -245,7 +236,7 @@ class _Todo_PageState extends State<Todo_Page> {
                                       child: Text(
                                         item[index].project.toString(),
                                         style: TextStyle(
-                                            color: Colors.white,
+                                            color: Colors.black,
                                             fontSize: 18,
                                             fontWeight: FontWeight.normal,
                                             decoration: TextDecoration.none),
@@ -258,35 +249,17 @@ class _Todo_PageState extends State<Todo_Page> {
                                   width: 300,
                                   margin: const EdgeInsets.only(
                                     top: 12,
-                                    right: 30,
                                   ),
                                   decoration: BoxDecoration(
-                                      color: Colors.white,
+                                      color: Colors.black,
                                       borderRadius:
                                           BorderRadius.circular(15.0)),
                                 ),
                               ],
                             )),
-                            InkWell(
-                              onTap: () async {
-                                FocusManager.instance.primaryFocus?.unfocus();
-                                await dbhelper.deleteList(item[index].id!);
-                                asynctask();
-                              },
-                              child: Icon(
-                                Icons.delete,
-                                color: Colors.white,
-                              ),
-                            )
                           ],
                         ),
-                        margin:
-                            const EdgeInsets.only(top: 4, right: 15, left: 15),
-                        decoration: BoxDecoration(
-                            color: Colors.blueGrey,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0))),
-                      ),
+                      ),*/
                     );
                   },
                 )),

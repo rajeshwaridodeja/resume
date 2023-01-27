@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:resume/change%20resume%20list.dart';
 
 import 'db.dart';
 import 'list.dart';
@@ -27,6 +28,7 @@ class _resume_pageState extends State<resume_page> {
   final TextEditingController Project = TextEditingController();
 
   var dbhelper = Databasehelper.instance;
+
   @override
   @override
   void initState() {
@@ -149,7 +151,23 @@ class _resume_pageState extends State<resume_page> {
                                   education,
                                   project);
                             }
-                            Navigator.pop(context, true);
+
+                            final List data = [
+                              "Name: $name",
+                              "Email: $email",
+                              "Mobile No: $mobile",
+                              "Experience: $experience",
+                              "Education: $education",
+                              "Project: $project",
+                            ];
+
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Change_List(
+                                    data: data,
+                                  ),
+                                ));
                           }
                         },
                         child: const Padding(
@@ -186,7 +204,13 @@ class _resume_pageState extends State<resume_page> {
                       ),
                       child: InkWell(
                         onTap: () {
-                          Navigator.pop(context);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Change_List(
+                                  data: [],
+                                ),
+                              ));
                         },
                         child: const Padding(
                           padding: EdgeInsets.only(left: 5),
