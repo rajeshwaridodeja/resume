@@ -204,13 +204,7 @@ class _resume_pageState extends State<resume_page> {
                       ),
                       child: InkWell(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Change_List(
-                                  data: [],
-                                ),
-                              ));
+                          Navigator.pop(context);
                         },
                         child: const Padding(
                           padding: EdgeInsets.only(left: 5),
