@@ -5,8 +5,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'db.dart';
 import 'list.dart';
+import 'main.dart';
 
 class Final_Resume extends StatefulWidget {
+  /// finanl data lane ke liye
   Final_Resume({Key? key, required this.myTitle}) : super(key: key);
 
   final List myTitle;
@@ -77,15 +79,11 @@ class _Final_ResumeState extends State<Final_Resume> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  resume_page(item: item[index]),
-                            )).then((value) {
-                          asynctask();
-                        });
+                                builder: (context) => Todo_Page()));
                       },
                       child: Text(
                         widget.myTitle[index],
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.black,
                             fontSize: 20,
                             fontWeight: FontWeight.normal,

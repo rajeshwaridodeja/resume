@@ -85,12 +85,16 @@ class _Change_ListState extends State<Change_List> {
   ];
 
   @override
+
+  ///changee the value data jo milta he vo next page me date display kar ne ka code
   void initState() {
     super.initState();
     setState(() {
       myTiles = widget.data;
     });
   }
+
+  /// yha tak next page me he
 
   // reorder method
   void updateMyTiles(int oldIndex, int newIndex) {
